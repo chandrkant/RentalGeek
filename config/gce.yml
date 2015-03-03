@@ -1,0 +1,19 @@
+development:
+  provider: Google
+  google_storage_access_key_id: 'GOOGNYAYZXXBAV5X67LE'
+  google_storage_secret_access_key: 'wxWAnIx7U20hFmZ1/86t5If2GI8AbWB/g46e8n2M'
+
+test:
+  provider: Google
+  google_storage_access_key_id: 'GOOGNYAYZXXBAV5X67LE'
+  google_storage_secret_access_key: 'wxWAnIx7U20hFmZ1/86t5If2GI8AbWB/g46e8n2M'
+
+production:
+  provider: Google
+  google_storage_access_key_id: 'GOOGNYAYZXXBAV5X67LE'
+  google_storage_secret_access_key: 'wxWAnIx7U20hFmZ1/86t5If2GI8AbWB/g46e8n2M'
+
+staging:
+  provider: Google
+  google_storage_access_key_id: 'GOOGNYAYZXXBAV5X67LE'
+  google_storage_secret_access_key: 'wxWAnIx7U20hFmZ1/86t5If2GI8AbWB/g46e8n2M'

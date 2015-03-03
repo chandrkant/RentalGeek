@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Rental Geek&trade; Tenant Application</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+	<style>
+		.logo { font-family: "sans-serif"; }
+
+		.logo .logo-part-1 {
+			color: #000;
+		}
+
+		.logo .logo-part-2 {
+			color: #06C;
+			font-weight: bold;
+		}
+
+		.logo .logo-trademark-symbol {
+			top: -0.3em;
+			left: -0.2em;
+			position: relative;
+
+			color: #888;
+			font-size: 80%;
+		}
+
+		#eof-message {
+			font-size: 2em;
+			text-align: center;
+			margin-top: 2em;
+			text-transform: uppercase;
+			color: #999;
+			margin: 2em 5em;
+		}
+
+		#summary-caption {
+			font-style: italic;
+			font-size: 70%;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+
+	<h1>
+		<div class="logo" href="/">
+			<span class="logo-part-1">Rental</span><span class="logo-part-2">Geek</span><span class="logo-trademark-symbol">&trade;</span>Tenant Application
+		</div>
+	</h1>
+
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			&nbsp;<div class="pull-right"><h3 class="panel-title">Application &#35;<%= @apply.rentalgeek_id %></h3></div>
+		</div>
+		<div class="panel-body">
+			<p><label>Address of rental:</label> <%= @rental_complex.full_address %></p>
+			<p><label>Rental complex name:</label> <%= @rental_complex.name %></p>
+			<p><label>Desired move-in date:</label> <%= @applicant.desires_to_move_in_on %> (<label>Earliest availabilty of rental:</label> <%= @rental_offering.earliest_available_on %>)</p>
+			<p><label>Rental type:</label> <%= @rental_offering.rental_offering_type %> (<%= pluralize @rental_offering.bedroom_count, "Bedroom" %>, <%= pluralize @rental_offering.bathroom_count, "Bathroom" %>, <%= @rental_offering.square_footage_copy %>, <%= @rental_offering.monthly_rent_copy %>)</p>
+			<p><label>List of roommates, whether they have Rental Geek&trade; accounts, etc.:</label> <%= @applicant.roommates_description %></p>
+
+			<p id="summary-caption">Prepared for <strong><%= @property_manager.name %></strong> on <%= @apply.created_at.to_date.to_formatted_s(:short) %>, at <%= @apply.created_at.to_formatted_s(:time) %>, the time of this prospective tenant's application for this rental.</p>
+		</div>
+	</div>
+
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			<h3 class="panel-title">Key Tenant Facts</h3>
+		</div>
+		<div class="panel-body">
+			<p><label>Name:</label> <%= @applicant.full_name %></p>
+			<p><label>E-mail:</label> <%= @applicant.email %></p>
+			<p><label>Date of birth:</label> <%= @applicant.born_on.to_date.to_formatted_s(:long) %></p>
+			<p><label>Social Security Number:</label> <%= @applicant.ssn %></p>
+			<p><label>Phone number:</label> <%= @applicant.phone_number %></p>
+			<p><label>Drivers license number:</label> <%= @applicant.drivers_license_number %> (<label>State issued:</label> <%= @applicant.drivers_license_state %>)</p>
+			<p><label>Bank:</label> <%= @applicant.bank_name %> (<%= @applicant.bank_city_and_state %>)</p>
+			<p><label>Was ever evicted:</label> <%= @applicant.was_ever_evicted %></p>
+			<p><label>Is felon:</label> <%= @applicant.is_felon %></p>
+			<p><label>Emergency contact:</label> <%= @applicant.emergency_contact_name %> | <%= @applicant.emergency_contact_phone_number %></p>
+			<p><label>Description of pets:</label> <%= simple_format @applicant.pets_description %></p>
+			<p><label>Description of vehicles:</label> <%= simple_format @applicant.vehicles_description %></p>
+		</div>
+	</div>
+</div>
+
+<% if @applicant.is_felon_explanation? %>
+<div class="panel panel-warning">
+	<div class="panel-heading">
+		<h3 class="panel-title">Statement supplied By Tenant Regarding His/Her Felony Conviction(s)</h3>
+	</div>
+	<div class="panel-body">
+		<%= simple_format @applicant.is_felon_explanation %>
+	</div>
+</div>
+<% end %>
+
+<% if @applicant.was_ever_evicted_explanation? %>
+<div class="panel panel-warning">
+	<div class="panel-heading">
+		<h3 class="panel-title">Statement Supplied By Tenant Regarding His/Her Eviction History</h3>
+	</div>
+	<div class="panel-body">
+		<%= simple_format @applicant.was_ever_evicted_explanation %>
+	</div>
+</div>
+<% end %>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Cosigner Information (If Applicable)</h3>
+	</div>
+	<div class="panel-body">
+		<p><%= @applicant.cosigner_name %> | <%= @applicant.cosigner_email_address %></p>
+	</div>
+</div>	
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Character Reference</h3>
+	</div>
+	<div class="panel-body">
+		<p><%= @applicant.character_reference_name %> | <%= @applicant.character_reference_contact_info %></p>
+	</div>
+</div>	
+
+<div class="panel panel-info">
+	<div class="panel-heading">
+		<h3 class="panel-title">Current Home</h3>
+	</div>
+	<div class="panel-body">
+		<p><label>Address:</label> <%= @applicant.current_home_street_address %></p>
+		<p><label>Move-in date:</label> <%= @applicant.current_home_moved_in_on %></p>
+		<p><label>Reason(s) for wanting to move:</label> <%= simple_format @applicant.current_home_dissatisfaction_explanation %></p>
+		<p><label>Owner:</label> <%= @applicant.current_home_owner %> | <%= @applicant.current_home_owner_contact_info %></p>
+	</div>
+</div>	
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Previous Home (If Applicable)</h3>
+	</div>
+	<div class="panel-body">
+		<p><label>Address:</label> <%= @applicant.previous_home_street_address %></p>
+		<p><label>Move-in date:</label> <%= @applicant.previous_home_moved_in_on %></p>
+		<p><label>Reason(s) for wanting to move:</label> <%= simple_format @applicant.previous_home_dissatisfaction_explanation %></p>
+		<p><label>Owner:</label> <%= @applicant.previous_home_owner %> | <%= @applicant.previous_home_owner_contact_info %></p>
+	</div>
+</div>
+
+<div class="panel panel-info">
+	<div class="panel-heading">
+		<h3 class="panel-title">Current Employment (If Applicable) and Other Income (If Applicable)</h3>
+	</div>
+	<div class="panel-body">
+		<p><label>Current employment status:</label> <%= @applicant.employment_status %></p>
+		<p><label>Employer:</label> <%= @applicant.current_employment_employer %> | <label>Ph:</label> <%= @applicant.current_employment_employer_phone_number %> | <label>E-mail:</label> <%= @applicant.current_employment_employer_email_address %></p>
+		<p><label>Start date:</label> <%= @applicant.current_employment_started_on %></p>
+		<p><label>Monthly income:</label> <%= number_to_currency(@applicant.current_employment_monthly_income, precision: 0) %></p>
+		<p><label>Supervisor:</label> <%= @applicant.current_employment_supervisor %></p>
+		<p><label>Position:</label> <%= @applicant.current_employment_position %></p>
+		<hr></hr>
+		<p><label>Other monthly income:</label> <%= number_to_currency(@applicant.other_income_monthly_amount, precision: 0) %></p>
+		<p><label>Other income sources:</label> <%= simple_format @applicant.other_income_sources %></p>
+	</div>
+</div>	
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Previous Employment (If Applicable)</h3>
+	</div>
+	<div class="panel-body">
+		<p><label>Employer:</label> <%= @applicant.previous_employment_employer %> | <label>Ph:</label> <%= @applicant.previous_employment_employer_phone_number %> | <label>E-mail:</label> <%= @applicant.previous_employment_employer_email_address %></p>
+		<p><label>Duration:</label> <%= @applicant.previous_employment_started_on %> - <%= @applicant.previous_employment_ended_on %></p>
+		<p><label>Monthly income:</label> <%= number_to_currency(@applicant.previous_employment_monthly_income, precision: 0) %></p>
+		<p><label>Supervisor:</label> <%= @applicant.previous_employment_supervisor %></p>
+		<p><label>Position:</label> <%= @applicant.previous_employment_position %></p>
+	</div>
+</div>
+
+<div id="eof-message">end of Rental Geek&trade; tenant application</div>
+
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+</body>
+</html>

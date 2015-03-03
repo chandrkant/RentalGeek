@@ -1,0 +1,3 @@
+<p>Hi</p>
+<p>You are invited by <%= @owner%> to join Roommate Group <%= @group.name%> on RentalGeek.com</p>
+<%= link_to "Join Roommate Group", Rails.application.config.action_mailer.default_url_options[:host] + '/sign_up', :class => "btn btn-default"%>

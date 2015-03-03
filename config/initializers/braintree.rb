@@ -1,0 +1,7 @@
+
+BraintreeRails::Configuration.environment = :sandbox
+BraintreeRails::Configuration.logger = Logger.new('log/braintree.log')
+BraintreeRails::Configuration.merchant_id = "73y4x7rz5ngqhnhd"
+BraintreeRails::Configuration.public_key = "nbfwnx8sd8nx3k2t"
+BraintreeRails::Configuration.private_key = "21d0bb1cce89c4092128f37ae7c38db7"
+BraintreeRails::Configuration.client_side_encryption_key = "MIIBCgKCAQEA4EpG4sAVelrbY6vMEj8f8U423raM62vJtvKx8id2CV0Bka3Je1W8l1dCjhtw07m0j8JsoF2/4VGlqzTraTuH4+NTT1zE7sRVOrMQ5GSetMnND53lqfEaD14HRrcMaPLrr/wybhaWiXWQiYnjaCPFp5/K7loBIgYoULj68CAeqh4j8afTO6dvxYnMDqcr7Dd9RU5jBXYhcj4Rb0tcNMoUKuIwTqo4GkGDbxuZACOq19WV9DiHDubKGAZjtWtK28sQvIxQzTgzJmv1Q6TUivV20lh/ikJDz+miDV7JFHxSYwU1zkD1/GFDfD29LrTq0S42hfYOYtwOCAnb"

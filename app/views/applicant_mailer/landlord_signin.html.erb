@@ -1,0 +1,5 @@
+<p>Hi <%= @email %></p>
+<p>Your can access your Account here<p>
+<p><%= link_to 'Access your account', Rails.application.config.action_mailer.default_url_options[:host] + '/login' %></p>
+<p>Email: <%= @email%></p>
+<p>Password: <%= @password%></p>

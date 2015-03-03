@@ -1,0 +1,2 @@
+$mandrill = Mandrill::API.new 'YOUR_API_KEY'
+
